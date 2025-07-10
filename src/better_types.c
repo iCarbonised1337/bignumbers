@@ -43,8 +43,6 @@ better_double sum_bd(better_double A, better_double B){
 
 // to-do: think about how to handle multiplication of two better_double
 better_double prod_bd(better_double A, better_double B){
-    /* x = x_1 * 10^-i + x_0, 
-       y = y_1 * 10^-i + y_0*/
     uint_fast8_t mult_buffer [2 * PRECISION] = {0};
     
     better_double output;
@@ -74,11 +72,9 @@ better_double reduce_bd(better_double input){
     /* reduces the bd to scientific notation*/
     long integral_part = input.int_part;
     size_t length_of_int_part = 0;
-    while(integral_part>10){
-        integral_part /= 10;
-        length_of_int_part++;
-    }
-
+    size_t shift;
+    memmove(&input.frac_part[shift], &input.frac_part[0], (PRECISION - shift - 1) * sizeof(input.frac_part[0]));
+    
 }
 
 
