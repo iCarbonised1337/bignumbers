@@ -25,4 +25,11 @@ better_double assign_bd(value);
 
 void print_bd(better_double input);
 
+large_num reduce_ln(large_num input);
+
+large_num prod_ln(large_num input);
+
+large_num print_ln(large_num input);
+
+
 #endif

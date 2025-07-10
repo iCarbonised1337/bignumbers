@@ -6,8 +6,8 @@ large_num factorial_of(int input){
     large_num output = {(double) 1,0};
     for(size_t i = 1; i <= input ; i++){
         large_num iter = {i,0};
-        output = product(iter,output);
-        output = reduce(output);
+        output = prod_bd(iter,output);
+        output = reduce_bd(output);
     }
     return output;
 }
