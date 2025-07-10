@@ -1,23 +1,35 @@
-#include "better_types.h"
+#include"better_types.h"
 #include<stdlib.h>
-#include<math.h>
+#include<stdio.h>
 
-better_double assign_bd(value){
+better_double assign_bd(long double input){
+    // declare output
     better_double output = {0};
-    output.int_part = (long) value;
-    for(size_t i = 0; i < PRECISION; i++){
-        output.frac_part[i] = (value - output.int_part) * pow(10, i);
-        value -= output.frac_part[i] / pow(10, i); 
+    // segregate integral and frac parts
+    output.int_part = (long)input;
+    double frac = input - output.int_part;
+
+    for (size_t i = 0; i < PRECISION; ++i) {
+        frac *= 10.0;
+        int digit = (int)frac;          /* always 0–9 */
+        output.frac_part[i] = (uint_fast8_t)digit;
+        frac -= digit;                  /* keep only the remainder */
     }
     return output;
 }
 
 void print_bd(better_double input){
-    printf("%lld", input.int_part);
-    for(size_t i = 0; i<PRECISION ; i++){
+    size_t significance = PRECISION;
+    for(size_t i = PRECISION-1; i != 0; i--){
+        if(input.frac_part[i] != 0){
+            break;
+            significance--;
+        }
+    }
+    printf("%ld", input.int_part);
+    for(size_t i = 0; i<= significance; i++){
         printf("%d",input.frac_part[i]);
     }
-    printf("\n");
 }
 
 better_double sum_bd(better_double A, better_double B){
@@ -67,15 +79,3 @@ better_double prod_bd(better_double A, better_double B){
 }
 
 
-large_num reduce_bd(large_num input){
-    /* reduces the bd to scientific notation*/
-    large_num output = input;
-    while(output.coeff.int_part >= 10){
-
-        memmove(&output.coeff.frac_part[1], &output.coeff.frac_part[0], (PRECISION - 1) * sizeof(output.coeff.frac_part[0]));
-        output.coeff.frac_part[0] = output.coeff.int_part % 10;
-        output.coeff.int_part /= 10;
-        output.pow ++;         
-    }
-    return output;
-}

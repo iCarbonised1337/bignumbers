@@ -1,13 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "./include/better_types.h"
+#include"better_types.h"
 
-large_num factorial_of(int input){
-    large_num output = {(double) 1,0};
+large_num factorial_of(size_t input){
+
+    large_num output = {assign_bd(1), 0};
+    
     for(size_t i = 1; i <= input ; i++){
-        large_num iter = {i,0};
-        output = prod_bd(iter,output);
-        output = reduce_bd(output);
+        large_num iter = {assign_bd(i),0};
+        output = prod_ln(iter,output);
+        output = reduce_ln(output);
     }
     return output;
 }
@@ -26,7 +28,9 @@ int main(){
         return 1;
     }
     large_num result = factorial_of(to_fac);
-    printf("the factorial of %d is %f * 10^%lli\n", to_fac, result.coeff, result.pow);
+    printf("the factorial of %d is ", to_fac);
+    print_bd(result.coeff);
+    printf(" * 10^%lld \n", result.pow);
 
     return 0;
 }

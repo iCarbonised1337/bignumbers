@@ -1,6 +1,6 @@
 #include "better_types.h"
-#include<stdlib.h>
-#include<math.h>
+#include <stdlib.h>
+#include <string.h>
 
 large_num reduce_ln(large_num input){
     /* reduces the bd to scientific notation*/

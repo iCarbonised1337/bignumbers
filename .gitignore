@@ -1,0 +1,13 @@
+# Build artifacts
+*.o
+example        # name of your executable
+*.exe          # Windows
+*.out          # alt executable name
+*.dSYM/        # macOS debug bundle
+*.a            # static libs
+*.so
+*.dll
+
+# Editor backups
+*~
+#*#
