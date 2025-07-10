@@ -43,13 +43,29 @@ better_double sum_bd(better_double A, better_double B){
 
 // to-do: think about how to handle multiplication of two better_double
 better_double prod_bd(better_double A, better_double B){
-    /*returns the product of two better_double numbers*/
+    /* x = x_1 * 10^-i + x_0, 
+       y = y_1 * 10^-i + y_0*/
+    uint_fast8_t mult_buffer [2 * PRECISION] = {0};
+    
     better_double output;
-    better_double carry = {0};
-    for(size_t i = PRECISION; i >=0; i--){
-        output.frac_part[i] = A.frac_part[i] * B.frac_part[i] + carry.frac_part[i];
+    unsigned int carry = 0;
+    unsigned tmp = 0;
 
+    for(size_t i = PRECISION - 1; i != 0; i--){
+        carry = 0;
+        for(size_t j = PRECISION - 1; j != 0; j--){
+
+            tmp = A.frac_part[i] * B.frac_part[j] + carry;
+            mult_buffer[j + i + 1] += tmp;
+            carry = tmp / 10;
+        }
+        mult_buffer[i] += carry;
     }
+    output.int_part = A.int_part * B.int_part + carry;
+    for(size_t i = 0; i < PRECISION; i++ ){
+        output.frac_part[i] = mult_buffer[i];
+    }
+    return output;
 }
 
 
