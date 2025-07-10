@@ -67,31 +67,15 @@ better_double prod_bd(better_double A, better_double B){
 }
 
 
-
-better_double reduce_bd(better_double input){
+large_num reduce_bd(large_num input){
     /* reduces the bd to scientific notation*/
-    long integral_part = input.int_part;
-    size_t length_of_int_part = 0;
-    size_t shift;
-    memmove(&input.frac_part[shift], &input.frac_part[0], (PRECISION - shift - 1) * sizeof(input.frac_part[0]));
-    
+    large_num output = input;
+    while(output.coeff.int_part >= 10){
+
+        memmove(&output.coeff.frac_part[1], &output.coeff.frac_part[0], (PRECISION - 1) * sizeof(output.coeff.frac_part[0]));
+        output.coeff.frac_part[0] = output.coeff.int_part % 10;
+        output.coeff.int_part /= 10;
+        output.pow ++;         
+    }
+    return output;
 }
-
-
-// large_num reduce(large_num input){
-//     int integral_part = input.coeff;
-//     large_num input_buffer = input;
-    
-//     if (integral_part == 0){
-//         input_buffer = input;
-//     }
-//     else{
-//         while (integral_part >= 10){
-//             integral_part/=10;
-//             input_buffer.coeff/=10;
-//             input_buffer.pow++;
-//         }
-//     }
-//     return input_buffer;
-// }
-
