@@ -20,14 +20,14 @@ better_double assign_bd(long double input){
 
 void print_bd(better_double input){
     size_t significance = PRECISION;
-    for(size_t i = PRECISION-1; i != 0; i--){
+    for(size_t i = PRECISION-1; i > 0; i--){
         if(input.frac_part[i] != 0){
             break;
             significance--;
         }
     }
-    printf("%ld", input.int_part);
-    for(size_t i = 0; i<= significance; i++){
+    printf("%ld.", input.int_part);
+    for(size_t i = 0; i <= SIGNIFICANT_DIGITS; i++){
         printf("%d",input.frac_part[i]);
     }
 }

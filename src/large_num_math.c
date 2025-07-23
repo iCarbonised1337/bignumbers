@@ -1,6 +1,7 @@
 #include "better_types.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 large_num reduce_ln(large_num input){
     /* reduces the bd to scientific notation*/
@@ -21,4 +22,9 @@ large_num prod_ln(large_num A, large_num B){
     output.pow = A.pow + B.pow;
     output = reduce_ln(output);
     return output;
+}
+
+void print_ln(large_num input){
+    print_bd(input.coeff);
+    printf(" * 10^%lld", input.pow);
 }

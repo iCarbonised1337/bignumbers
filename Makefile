@@ -13,6 +13,12 @@ $(TARGET): $(OBJS)
 %.o: %.c include/better_types.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
+debug: CFLAGS += -g
+
+debug : $(OBJS) 
+	$(CC) $(OBJS) $(LDFLAGS) -o $@
+
 .PHONY: clean
 clean:
 	rm -f $(OBJS) $(TARGET)
+	rm -f debug

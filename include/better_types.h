@@ -4,6 +4,7 @@
 #include<stdint.h>
 
 #define PRECISION 100
+#define SIGNIFICANT_DIGITS 10
 
 typedef struct better_double{
     long int_part;
@@ -29,7 +30,7 @@ large_num reduce_ln(large_num input);
 
 large_num prod_ln(large_num A, large_num B);
 
-large_num print_ln(large_num input);
+void print_ln(large_num input);
 
 
 #endif

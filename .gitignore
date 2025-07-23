@@ -7,6 +7,7 @@ example        # name of your executable
 *.a            # static libs
 *.so
 *.dll
+debug
 
 # Editor backups
 *~
